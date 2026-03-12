@@ -4,9 +4,9 @@ flask-sqlalchemy
 flask-jwt-extended
 psycopg2-binary
 deepface
-tensorflow==2.15.0
-keras==2.15.0
-tf-keras==2.15.0
+tensorflow
+keras
+tf-keras
 opencv-python
 groq
 python-dotenv
