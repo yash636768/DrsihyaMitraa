@@ -1,5 +1,5 @@
 import React from 'react';
-import { Camera, Users, Shield, Send } from 'lucide-react';
+import { Camera, Users, Shield, Send, Clock } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const StatCard = ({ icon: Icon, label, value, color }) => (
@@ -43,23 +43,49 @@ const Dashboard = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div className="lg:col-span-2 glass p-8">
-                    <div className="flex justify-between items-center mb-6">
-                        <h3 className="text-xl font-bold text-white">Recent Activity</h3>
-                        <button className="text-indigo-400 text-sm font-semibold hover:text-indigo-300">View All</button>
-                    </div>
-                    <div className="space-y-4">
-                        {[1, 2, 3].map((_, i) => (
-                            <div key={i} className="flex items-center gap-4 p-4 rounded-xl hover:bg-white/5 transition-colors border border-transparent hover:border-white/5">
-                                <div className="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center">
-                                    <Camera size={20} className="text-slate-500" />
-                                </div>
-                                <div className="flex-1">
-                                    <p className="font-semibold text-white">New photos uploaded</p>
-                                    <p className="text-sm text-slate-400">12 photos from "Beach Trip"</p>
-                                </div>
-                                <p className="text-xs text-slate-500">2h ago</p>
+                <div className="lg:col-span-2 glass p-10">
+                    <div className="flex justify-between items-center mb-10">
+                        <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 bg-indigo-600/10 rounded-2xl flex items-center justify-center">
+                                <Clock className="text-indigo-400" size={24} />
                             </div>
+                            <h3 className="text-2xl font-extrabold text-white">Live Insights</h3>
+                        </div>
+                        <button className="px-5 py-2.5 rounded-xl bg-white/5 border border-white/10 text-slate-300 text-sm font-bold hover:bg-white/10 transition-all">Export Log</button>
+                    </div>
+                    <div className="space-y-6">
+                        {[
+                            { title: 'New Batch Processed', desc: '12 family portraits organized', time: '2m ago', icon: Camera, status: 'Completed' },
+                            { title: 'New Person Identified', desc: 'Added "Rohan" to 8 existing photos', time: '1h ago', icon: Users, status: 'Success' },
+                            { title: 'Gallery Shared', desc: 'Beach Trip album shared via Email', time: '4h ago', icon: Send, status: 'Sent' },
+                        ].map((item, i) => (
+                            <motion.div
+                                key={i}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: i * 0.1 }}
+                                className="group flex items-center gap-6 p-6 rounded-3xl hover:bg-white/5 transition-all border border-transparent hover:border-white/10"
+                            >
+                                <div className="w-16 h-16 rounded-2xl bg-slate-900 border border-white/5 flex items-center justify-center overflow-hidden relative">
+                                    <item.icon size={28} className="text-slate-500 group-hover:text-indigo-400 transition-colors z-10" />
+                                    <div className="absolute inset-0 bg-indigo-600/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                </div>
+                                <div className="flex-1 min-w-0">
+                                    <div className="flex items-center gap-3 mb-1">
+                                        <p className="font-extrabold text-white text-lg">{item.title}</p>
+                                        <span className="text-[10px] font-black uppercase tracking-widest px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-500 border border-emerald-500/20">{item.status}</span>
+                                    </div>
+                                    <p className="text-slate-400 font-medium truncate">{item.desc}</p>
+                                </div>
+                                <div className="text-right flex-shrink-0">
+                                    <p className="text-xs font-bold text-slate-500 uppercase tracking-tighter">{item.time}</p>
+                                    <div className="mt-2 flex -space-x-2 justify-end opacity-40 group-hover:opacity-100 transition-opacity">
+                                        {[1, 2, 3].map(j => (
+                                            <div key={j} className="w-6 h-6 rounded-full border-2 border-bg-dark bg-slate-800" />
+                                        ))}
+                                    </div>
+                                </div>
+                            </motion.div>
                         ))}
                     </div>
                 </div>
