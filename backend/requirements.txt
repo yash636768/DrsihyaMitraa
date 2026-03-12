@@ -1,0 +1,14 @@
+flask
+flask-cors
+flask-sqlalchemy
+flask-jwt-extended
+psycopg2-binary
+deepface
+tensorflow==2.15.0
+keras==2.15.0
+tf-keras==2.15.0
+opencv-python
+groq
+python-dotenv
+requests
+pillow
